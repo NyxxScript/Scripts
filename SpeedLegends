@@ -1,0 +1,232 @@
+if game.PlaceId == 3101667897 then
+    
+    ----------------Load
+
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+    ----------------Main
+
+    local Window = OrionLib:MakeWindow({Name = "SpeedLegends | Nyxx", HidePremium = false, SaveConfig = true, ConfigFolder = "SpeedLegendsCfg", IntroEnable = false, IntroText = "Nyxx Hub"})
+
+    ----------------Valor
+
+    _G.AutoCollect = true
+    _G.CollectGem = true
+    _G.AutoRebirth = true
+
+
+    ----------------Local
+
+    local plr = game.Players.LocalPlayer
+    local char = plr.Character
+    
+    
+    ----------------Funções
+
+    function AutoCollect()
+        while _G.AutoCollect == true do
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Red Orb",
+                [3] = "City"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("orbEvent"):FireServer(unpack(args))
+            wait(0,1)
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Yellow Orb",
+                [3] = "City"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("orbEvent"):FireServer(unpack(args))
+            wait(0,1)
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Blue Orb",
+                [3] = "City"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("orbEvent"):FireServer(unpack(args))
+            wait(0,1)
+        end
+    end
+    
+    function CollectGem()
+        while _G.CollectGem == true do
+            local args = {
+                [1] = "collectOrb",
+                [2] = "Gem",
+                [3] = "City"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("orbEvent"):FireServer(unpack(args))
+            wait(0,1)
+        end
+    end
+
+    function AutoRebirth()
+        while _G.AutoRebirth == true do
+            local args = {
+                [1] = "rebirthRequest"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("rebirthEvent"):FireServer(unpack(args))
+            wait(60)
+        end
+    end
+------------Races
+
+    function WinRaceGrassland()
+        char.HumanoidRootPart.CFrame = CFrame.new(1686.074951171875, 0.8415577411651611, -5946.63427734375)
+    end
+    
+    function WinRaceDesert()
+        char.HumanoidRootPart.CFrame = CFrame.new(48.3109130859375, 0.8415579795837402, -8680.453125)
+    end
+    
+    function WinRaceMagma()
+        char.HumanoidRootPart.CFrame = CFrame.new(1001.3311767578125, 0.8415579795837402, -10986.2177734375)
+    end
+    
+    ----------------Teleport
+    function TeleportCity()
+        char.HumanoidRootPart.CFrame = CFrame.new(-583.8887329101562, 4.126863956451416, 394.6996765136719)
+    end
+
+    function TeleportSnowCity()
+        char.HumanoidRootPart.CFrame = CFrame.new(-490.7110900878906, 18.1712646484375, 2426.092041015625)
+    end
+
+    function TeleportMagmaCity()
+        char.HumanoidRootPart.CFrame = CFrame.new(2029.2947998046875, 76.15544891357422, 4384.72998046875) --2511.089111328125, 15.068077087402344, 4353.388671875
+    end
+
+    function TeleportDesert()
+        char.HumanoidRootPart.CFrame = CFrame.new(2511.089111328125, 15.068077087402344, 4353.388671875)
+    end
+
+    function TeleportHoops()
+        char.HumanoidRootPart.CFrame = CFrame.new(-801.117919921875, 68.0768051147461, -381.2716064453125)
+    end
+    
+        ----------------Player
+
+        local JogadorTab = Window:MakeTab({
+        Name = "Player",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+    local Section = JogadorTab:AddSection({
+        Name = "Auto-Farm"
+    })
+    JogadorTab:AddToggle({
+        Name = "Collect Orbs",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoCollect = Value
+            AutoCollect()
+
+            
+        end    
+    })
+    JogadorTab:AddToggle({
+        Name = "Collect Gem",
+        Default = false,
+        Callback = function(Value)
+            _G.CollectGem = Value
+            CollectGem()
+
+            
+        end    
+    })
+    JogadorTab:AddToggle({
+        Name = "Auto Rebirth",
+        Default = false,
+        Callback = function(Value)
+            _G.AutoRebirth = Value
+            AutoRebirth()
+
+            
+        end    
+    })
+    ----------------Race
+
+    local RaceTab = Window:MakeTab({
+        Name = "Race",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+    local Section = RaceTab:AddSection({
+        Name = "Insta Win Race"
+    })
+    RaceTab:AddButton({
+        Name = "Insta Win Grassland",
+        Callback = function()
+            WinRaceGrassland()
+          end    
+    })
+    RaceTab:AddButton({
+        Name = "Insta Win Desert",
+        Callback = function()
+            WinRaceDesert()
+          end    
+    })
+    RaceTab:AddButton({
+        Name = "Insta Win Magma",
+        Callback = function()
+            WinRaceMagma()
+          end    
+    })
+    
+    ----------------Teleport
+    local TeleportTab = Window:MakeTab({
+        Name = "Teleport City",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+    local Section = TeleportTab:AddSection({
+        Name = "Teleport"
+    })
+    TeleportTab:AddButton({
+        Name = "City",
+        Callback = function()
+           TeleportCity()
+          end    
+    })
+    TeleportTab:AddButton({
+        Name = "Snow City",
+        Callback = function()
+           TeleportSnowCity()
+          end    
+    })
+    TeleportTab:AddButton({
+        Name = "Magma City",
+        Callback = function()
+           TeleportMagmaCity()
+          end    
+    })
+    TeleportTab:AddButton({
+        Name = "Teleport Desert - 5 rebirths required",
+        Callback = function()
+           TeleportDesert()
+          end    
+    })
+
+    ------------Hoops
+    local HoopsTab = Window:MakeTab({
+        Name = "Hoops",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+    
+    HoopsTab:AddButton({
+        Name = "Teleport to Hoops",
+        Callback = function()
+           TeleportHoops()
+          end    
+    })
+
+
+
+end
